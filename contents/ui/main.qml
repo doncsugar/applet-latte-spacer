@@ -18,15 +18,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasmoid 2.0
+import QtQuick
+import QtQuick.Layouts
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
+import org.kde.kirigami as Kirigami
 
-Item{
+PlasmoidItem {
     id: root
 
-    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    preferredRepresentation: fullRepresentation
 
     Layout.fillWidth: horizontal && plasmoid.configuration.lengthType===2 || /*Expanded OR vertical Percentage*/
                       !horizontal && plasmoid.configuration.lengthType===2 ? true : false
@@ -129,17 +130,17 @@ Item{
         }
     }
 
-    Loader{
+    Loader {
         active: latteInEditMode
         anchors.fill: parent
 
-        sourceComponent: Rectangle{
+        sourceComponent: Rectangle {
             anchors.fill: parent
             border.width: 1
-            border.color: theme.highlightColor
+            border.color: Kirigami.Theme.highlightColor
             color: alphaBackColor
 
-            property color alphaBackColor: Qt.rgba(theme.highlightColor.r, theme.highlightColor.g, theme.highlightColor.b, 0.5)
+            property color alphaBackColor: Qt.rgba(Kirigami.Theme.highlightColor.r, Kirigami.Theme.highlightColor.g, Kirigami.Theme.highlightColor.b, 0.5)
         }
     }
 
@@ -147,7 +148,7 @@ Item{
     //! it should be called only the first time an applet is created and loaded because
     //! afterwards the applet has no way to move between different processes such
     //! as Plasma and Latte
-    Timer{
+    Timer {
         id: containmentIdentifierTimer
         interval: 5000
         onTriggered: {

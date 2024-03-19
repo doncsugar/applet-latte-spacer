@@ -17,12 +17,13 @@
 *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import QtQuick 2.0
-import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.0
-import QtGraphicalEffects 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+// import QtGraphicalEffects 1.0
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami as Kirigami
 
 Item {
     id: root
@@ -39,10 +40,10 @@ Item {
     property int lengthType: 0
 
     ColumnLayout {
-        spacing: units.largeSpacing
+        spacing: Kirigami.Units.largeSpacing
         Layout.fillWidth: true
 
-        GridLayout{
+        GridLayout {
             columns: 2
             Label {
                 Layout.minimumWidth: Math.max(centerFactor * root.width, minimumWidth)
@@ -50,10 +51,10 @@ Item {
                 horizontalAlignment: Text.AlignRight
             }
 
-            ExclusiveGroup {
+            ButtonGroup {
                 id: lengthTypeGroup
-                onCurrentChanged: {
-                    root.lengthType = current.type;
+                onClicked: {
+                    root.lengthType = checkedButton.type;
                 }
             }
 
@@ -61,7 +62,7 @@ Item {
                 RadioButton {
                     id: usePixels
                     checked: root.lengthType === type
-                    exclusiveGroup: lengthTypeGroup
+                    ButtonGroup.group: lengthTypeGroup
 
                     readonly property int type: 0 /*Pixels*/
                 }
@@ -70,11 +71,19 @@ Item {
                     id: lengthPixels
                     Layout.minimumWidth: Math.max(lengthPixels.implicitWidth, lengthPercentage.implicitWidth)
 
-                    minimumValue: 0
-                    maximumValue: 1024
+                    from: 0
+                    to: 1024
                     stepSize: 10
-                    suffix: " " + i18nc("pixels","px.")
+
+                    // used label instead because this callback interrupts input
+                    // textFromValue: function(value) { return value + " " + i18nc("pixels", "px.") }
+                    // valueFromText: function(text) { return Number(text.split(" ")[0]) }
                 }
+                Label {
+                    height: lengthPixels.height
+                    text: i18nc("pixels", "px.")
+                }
+
             }
 
             Label {}
@@ -83,7 +92,7 @@ Item {
                 RadioButton {
                     id: usePercentage
                     checked: root.lengthType === type
-                    exclusiveGroup: lengthTypeGroup
+                    ButtonGroup.group: lengthTypeGroup
 
                     readonly property int type: 1 /*Percentage*/
                 }
@@ -92,15 +101,17 @@ Item {
                     id: lengthPercentage
                     Layout.minimumWidth: Math.max(lengthPixels.implicitWidth, lengthPercentage.implicitWidth)
 
-                    minimumValue: 0
-                    maximumValue: 1000
+                    from: 0
+                    to: 1000
                     stepSize: 20
-                    suffix: " %"
+
+                    // textFromValue: function(value) { return value + " %" }
+                    // valueFromText: function(text) { return Number(text.split(" ")[0]) }
                 }
 
                 Label {
                     height: lengthPercentage.height
-                    text: " " + i18n(" of panel thickness")
+                    text: "% " + i18n(" of panel thickness")
                 }
             }
 
@@ -112,7 +123,7 @@ Item {
                 RadioButton {
                     id: latteIcon
                     checked: root.lengthType === type
-                    exclusiveGroup: lengthTypeGroup
+                    ButtonGroup.group: lengthTypeGroup
 
                     readonly property int type: 3 /*Latte Icon*/
                 }
@@ -130,7 +141,7 @@ Item {
                 RadioButton {
                     id: useExpanded
                     checked: root.lengthType === type
-                    exclusiveGroup: lengthTypeGroup
+                    ButtonGroup.group: lengthTypeGroup
 
                     readonly property int type: 2 /*Exclusive*/
                 }
