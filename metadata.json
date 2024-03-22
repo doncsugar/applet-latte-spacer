@@ -7,15 +7,15 @@
             }
         ],
         "Category": "Utilities",
-        "Description": "For all your separation tasks",
-        "Icon": "filename-divider",
-        "Id": "org.kde.latte.separator",
+        "Description": "For all your spacer tasks",
+        "Icon": "kdenlive-spacer-tool",
+        "Id": "org.kde.latte.spacer",
         "License": "GPLv2",
-        "Name": "Latte Separator",
-        "Version": "0.1.1",
-        "Website": "https://github.com/psifidotos/applet-latte-separator"
+        "Name": "Latte Spacer",
+        "Version": "0.1.2",
+        "Website": "https://github.com/psifidotos/applet-latte-spacer"
     },
-    "Keywords": "separator",
+    "Keywords": "spacer",
     "X-Plasma-API-Minimum-Version": "6.0",
     "KPackageStructure": "Plasma/Applet"
 }
