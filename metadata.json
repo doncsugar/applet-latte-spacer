@@ -7,12 +7,12 @@
             }
         ],
         "Category": "Utilities",
-        "Description": "For all your spacer tasks",
-        "Icon": "kdenlive-spacer-tool",
+        "Description": "Reserve empty spaces within panels and docks",
+        "Icon": "filename-space-amarok",
         "Id": "org.kde.latte.spacer",
         "License": "GPLv2",
         "Name": "Latte Spacer",
-        "Version": "0.1.2",
+        "Version": "0.3.0",
         "Website": "https://github.com/psifidotos/applet-latte-spacer"
     },
     "Keywords": "spacer",
